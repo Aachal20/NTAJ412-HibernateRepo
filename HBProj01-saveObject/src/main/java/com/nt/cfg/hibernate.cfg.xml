@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- JDBC properties -->
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="connection.username">system</property>
+		<property name="connection.password">manager</property>
+         <!-- Hibernate properties -->
+		
+		<!-- <property name="show_sql">true</property>  -->
+		<property name="format.sql">true</property>
+		<property name="show.sql">true</property>
+		<!-- mapping file name and location -->
+		<mapping resource="com/nt/entity/product.hbm.xml" />
+		
+	</session-factory>
+</hibernate-configuration>
