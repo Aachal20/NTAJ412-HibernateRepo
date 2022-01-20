@@ -21,55 +21,31 @@ public class SaveObjectTest{
 		//create session object
 		Session ses = factory.openSession();
 		org.hibernate.Transaction tx=null;
-		boolean flag=false;
-		org.hibernate.Transaction tx1=null;
+		//Transaction tx=null;
 		try {
 			//begin Transaction
-			tx1= ses.beginTransaction();   //internally calls con.setAutoCommit(false) to disable autoCommit mode on DB s/w
+			tx= ses.beginTransaction();   //internally calls con.setAutoCommit(false) to disable autoCommit mode on DB s/w
 			//prepare entity object
 			Product prod = new Product();
-			prod.setPid(1011);
-			prod.setPname("Sports Car");
-			prod.setPrice(255000.35f);
-			prod.setQty(2.51f);
+			prod.setPid(1008);
+			prod.setPname("Luxory Car");
+			prod.setPrice(25000.35f);
+			prod.setQty(2.01f);
 			//save object 
 			
 			Integer idValue=(Integer)ses.save(prod);             //Gives persistence instructions to hibernate to save object(insert object data as the record)
-			tx1.commit();                             //internally calls con.commit() to make insertion execution result permemet
+			tx.commit();                             //internally calls con.commit() to make insertion execution result permemet
 			System.out.println("The generatred ID value::" +idValue);
 			System.out.println("Object is saved(record is inserted)");
-		  flag=true;
 		}
 		catch(HibernateException he){
 			he.printStackTrace();
-		   flag=false;
+			tx.rollback();                                     //internally calls con.rollaback() to rollback the result of query execution
+			System.out.println("Object is not  saved(Record is not inserted)");
 		}
-		finally {
-			if(flag) {
-				tx1.commit();
-				System.out.println("Object is saved(record is inserted)");
-			}
-			else {
-				tx1.rollback();
-				System.out.println("Object is not  saved(record is not  inserted)");
-			}
-		
 		//close session obj
-		try {
-			if(ses!=null)
-				ses.close();
-		}
-		catch(HibernateException he) {
-			he.printStackTrace();
-		}
+		ses.close();
 		//close sessionFactory object
-		try {
-			if(factory!=null)
-				factory.close();
-		}
-		catch(HibernateException he) {
-			he.printStackTrace();
-		}
-		}//finally
+		factory.close();
 	}//main
 }//class

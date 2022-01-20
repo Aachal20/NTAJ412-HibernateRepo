@@ -13,6 +13,7 @@
 		<!-- <property name="show_sql">true</property>  -->
 		<property name="format.sql">true</property>
 		<property name="show.sql">true</property>
+		
 		<!-- mapping file name and location -->
 		<mapping resource="com/nt/entity/product.hbm.xml" />
 		
